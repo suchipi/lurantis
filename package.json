@@ -1,6 +1,6 @@
 {
   "name": "lurantis",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "bundler as a service; on-demand npm package bundler over http",
   "main": "dist/make-app.js",
   "types": "src/make-app.ts",
