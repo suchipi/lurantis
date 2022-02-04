@@ -12,7 +12,7 @@ const log = makeLogger(kleur.blue("HTTP"));
 export function makeApp(config: Config): express.Application {
   const app = express();
 
-  app.get("/*", (req, res) => {
+  app.get("npm/*", (req, res) => {
     function bail(status: number, message = "") {
       log(`Bailing on ${req.path}: ${status}`);
 
@@ -23,7 +23,7 @@ export function makeApp(config: Config): express.Application {
     log(`GET ${req.path}`);
 
     const badPkgUrlMessage =
-      "please specify a valid npm package name and full version, eg /lodash@4.17.21. You cannot use ranges (eg ^1.1.0), major-only versions (eg react@16) or tags like 'latest', 'next', etc.";
+      "please specify a valid npm package name and full version, eg /npm/lodash@4.17.21. You cannot use ranges (eg ^1.1.0), major-only versions (eg react@16) or tags like 'latest', 'next', etc.";
 
     const pkg = req.path.replace(/^\//, "");
     if (!pkg) {

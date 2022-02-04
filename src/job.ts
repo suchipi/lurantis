@@ -4,6 +4,7 @@ import { Config } from "./config";
 export type Job = {
   id: string;
   pkg: {
+    type: "npm";
     name: string;
     version: string;
   };
@@ -16,8 +17,9 @@ export type Job = {
 
 export function makeJob(config: Config, pkgName: string, version: string): Job {
   return {
-    id: `${pkgName}@${version}`,
+    id: `npm:${pkgName}@${version}`,
     pkg: {
+      type: "npm",
       name: pkgName,
       version,
     },
@@ -28,7 +30,7 @@ export function makeJob(config: Config, pkgName: string, version: string): Job {
       version.replace(/[^\w]/g, "_"),
     paths: {
       workDir: (...parts) =>
-        config.cacheDir(pkgName, version, "work", ...parts),
+        config.cacheDir("npm", pkgName, version, "work", ...parts),
       bundle: config.cacheDir(pkgName, version, "bundle.js"),
     },
   };

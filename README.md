@@ -13,7 +13,7 @@ npx lurantis --port 8080
 Then, send GET requests to it:
 
 ```sh
-curl http://localhost:8080/lodash@4.17.21
+curl http://localhost:8080/npm/lodash@4.17.21
 ```
 
 It'll fetch the package and all its dependencies from npm, bundle it up into a UMD module, and respond with the script:
