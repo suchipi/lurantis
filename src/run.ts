@@ -1,5 +1,9 @@
 import * as firstBase from "first-base";
 
+function printResult(result: firstBase.RunContext["result"]) {
+  return `${result.code}\n${result.stdout}\n${result.stderr}`;
+}
+
 export async function run(
   cmd: string,
   args: Array<string> = [],
@@ -9,11 +13,7 @@ export async function run(
   await ctx.completion;
   if (ctx.result.error || ctx.result.code !== 0) {
     throw new Error(
-      `Command '${JSON.stringify({
-        cmd,
-        args,
-        options,
-      })}' failed: ${JSON.stringify(ctx.result)}`
+      `Command '${[cmd, ...args].join(" ")}' failed: ${printResult(ctx.result)}`
     );
   } else {
     return ctx.result;
