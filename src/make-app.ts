@@ -23,7 +23,7 @@ export function makeApp(config: Config): express.Application {
     log(`GET ${req.path}`);
 
     const badPkgUrlMessage =
-      "please specify a valid npm package name and version, eg /lodash@4.17.21";
+      "please specify a valid npm package name and full version, eg /lodash@4.17.21. You cannot use ranges (eg ^1.1.0), major-only versions (eg react@16) or tags like 'latest', 'next', etc.";
 
     const pkg = req.path.replace(/^\//, "");
     if (!pkg) {
@@ -31,13 +31,22 @@ export function makeApp(config: Config): express.Application {
     }
 
     const matches = pkg.match(
-      /^((?:@[a-z0-9-~][a-z0-9-._~]*\/)?[a-z0-9-~][a-z0-9-._~]*)@([A-Za-z0-9.-_~]+)$/
+      /^((?:@[a-z0-9\-~][a-z0-9\-._~]*\/)?[a-z0-9\-~][a-z0-9\-._~]*)@([A-Za-z0-9.\-_]+)$/
     );
     if (!matches) {
       return bail(400, badPkgUrlMessage);
     }
 
     const [_, name, version] = matches;
+    if (/^[\d.]+$/.test(version) && !/^\d+\.\d+\.\d+$/.test(version)) {
+      // They specified some numbers, but not semver
+      return bail(400, badPkgUrlMessage);
+    }
+
+    if (!/\d/.test(version)) {
+      // probably a tag like 'latest' or 'next'. They need to be more specific
+      return bail(400, badPkgUrlMessage);
+    }
 
     const job = makeJob(config, name, version);
 
