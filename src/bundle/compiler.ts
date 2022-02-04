@@ -21,8 +21,7 @@ const primraf = util.promisify(rimraf);
 export async function compile(job: Job): Promise<void> {
   log(`Building: ${job.id}`);
 
-  const initialCwd = process.cwd();
-
+  const originalCwd = process.cwd();
   const dir = job.paths.workDir;
 
   try {
@@ -53,13 +52,14 @@ export async function compile(job: Job): Promise<void> {
     );
 
     log(`Starting kame bundle for: ${job.id}`);
-    process.chdir(dir()); // affects module paths in kame output comments/strings
-    const { warnings } = bundler.bundle({
+    process.env.KAME_ALLOW_UNRESOLVED = "true";
+    process.chdir(dir());
+
+    bundler.bundle({
       input: dir("index.js"),
       output: job.paths.bundle,
       globalName: job.globalName,
     });
-    warnings.forEach((message) => log(`kame warning from ${job.id}`, message));
 
     log(`Cleaning workdir for: ${job.id}`);
     await primraf(dir());
@@ -71,8 +71,8 @@ export async function compile(job: Job): Promise<void> {
     log(`Error while building ${job.id}: ${err?.stack || err?.message || err}`);
     throw err;
   } finally {
+    process.chdir(originalCwd);
     // Don't want our disk to fill up
     await primraf(npmLogsDir);
-    process.chdir(initialCwd);
   }
 }
