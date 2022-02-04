@@ -1,0 +1,10 @@
+lurantis $VERSION - bundler as a service
+
+Usage: lurantis [options]
+
+Options:
+  --help              Show this screen
+  --version           Print version
+  --port <number>     Which http port to run on [default: 8080]
+  --cache-dir <path>  Where to store compiled bundles
+                      to avoid recompilation [default: ./lurantis-cache]

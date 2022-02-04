@@ -1,7 +1,7 @@
 {
   "name": "lurantis",
   "version": "0.1.0",
-  "description": "on-demand npm package bundler over http",
+  "description": "bundler as a service; on-demand npm package bundler over http",
   "main": "dist/make-app.js",
   "types": "src/make-app.ts",
   "bin": "cli.js",
@@ -15,7 +15,10 @@
     "npm",
     "http",
     "webpack",
-    "babel"
+    "babel",
+    "service",
+    "web",
+    "rest"
   ],
   "author": "Lily Scott <me@suchipi.com>",
   "license": "MIT",

@@ -9,8 +9,7 @@ export type Job = {
   };
   globalName: string;
   paths: {
-    pkgDir: (...parts: Array<string>) => string;
-    entry: string;
+    workDir: (...parts: Array<string>) => string;
     bundle: string;
   };
 };
@@ -28,8 +27,8 @@ export function makeJob(config: Config, pkgName: string, version: string): Job {
       "_" +
       version.replace(/[^\w]/g, "_"),
     paths: {
-      pkgDir: (...parts) => config.cacheDir(pkgName, version, ...parts),
-      entry: config.cacheDir(pkgName, version, "index.js"),
+      workDir: (...parts) =>
+        config.cacheDir(pkgName, version, "work", ...parts),
       bundle: config.cacheDir(pkgName, version, "bundle.js"),
     },
   };
