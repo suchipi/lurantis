@@ -1,3 +1,5 @@
+// this is the resolver used to build lurantis itself, not the resolver used in lurantis for bundling stuff.
+
 const path = require("path");
 const kame = require("kame");
 
