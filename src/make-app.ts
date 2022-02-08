@@ -1,5 +1,6 @@
 import fs from "fs";
 import express from "express";
+import cors from "cors";
 import kleur from "kleur";
 import { Config } from "./config";
 import { sanitizeOutput } from "./sanitize-output";
@@ -12,6 +13,8 @@ const log = makeLogger(kleur.blue("HTTP"));
 
 export function makeApp(config: Config): express.Application {
   const app = express();
+
+  app.use(cors());
 
   app.get("/", homepage);
 
