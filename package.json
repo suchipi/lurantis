@@ -7,13 +7,10 @@
   "scripts": {
     "//1": "gets you back to the state you would be in after a git clone",
     "clean": "rimraf dist/* && rimraf node_modules && rimraf lurantis-cache/*",
-
     "//2": "build:bundle is for the npm bundle",
     "build:bundle": "rimraf 'dist/*' && kame bundle --resolver ./kame/lurantis-build-resolver.js --input ./src/cli.ts --output ./dist/cli.js",
-
     "//3": "build:ts is faster, so it's good for local dev",
     "build:ts": "rimraf 'dist/*' && tsc",
-    
     "//4": "build:bundle is for the npm bundle",
     "start": "npm run build:ts && ./cli.js"
   },
@@ -40,6 +37,7 @@
     "express": "^4.17.2",
     "kame": "^0.6.7",
     "kleur": "^4.1.4",
+    "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.5.5"
   },
