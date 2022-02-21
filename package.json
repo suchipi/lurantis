@@ -1,6 +1,6 @@
 {
   "name": "lurantis",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "bundler as a service; on-demand npm package bundler over http",
   "main": "index.js",
   "bin": "cli.js",
@@ -8,7 +8,7 @@
     "//1": "gets you back to the state you would be in after a git clone",
     "clean": "rimraf dist/* && rimraf node_modules && rimraf lurantis-cache/*",
     "//2": "build:bundle is for the npm bundle",
-    "build:bundle": "rimraf 'dist/*' && kame bundle --resolver ./kame/lurantis-build-resolver.js --input ./src/cli.ts --output ./dist/cli.js",
+    "build:bundle": "rimraf 'dist/*' && kame bundle --resolver ./kame/build-config.js --loader ./kame/build-config.js --input ./src/cli.ts --output ./dist/cli.js",
     "//3": "build:ts is faster, so it's good for local dev",
     "build:ts": "rimraf 'dist/*' && tsc",
     "//4": "start is for running the local dev server",
