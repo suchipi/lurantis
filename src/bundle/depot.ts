@@ -25,6 +25,7 @@ export async function ensureBundle(job: Job): Promise<void> {
     const promise = compile(job);
     inflightBuilds[job.id] = promise;
     const result = await promise;
+    log(`Package fulfilled: ${job.id}`);
     return result;
   } finally {
     delete inflightBuilds[job.id];
