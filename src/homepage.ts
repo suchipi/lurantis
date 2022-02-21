@@ -98,6 +98,10 @@ const content = (domain: string) => `
         You can use it in a script tag like so:
       </p>
       <pre><code>&lt;script src="${domain}/npm/lodash@4.17.21"&gt;&lt;/script&gt;</pre></code>
+      <p>
+        You can also add <code>?minify=true</code> to the end of the URL to minify
+        the code.
+      </p>
       <h2>About the global variable</h2>
       <p>
         The format of the global variable will always be like this, and will

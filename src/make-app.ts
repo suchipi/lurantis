@@ -54,7 +54,14 @@ export function makeApp(config: Config): express.Application {
       return bail(400, badPkgUrlMessage);
     }
 
-    const job = makeJob(config, name, version);
+    const job = makeJob(config, {
+      type: "npm",
+      name,
+      version,
+      options: {
+        minify: req.query.minify ? true : false,
+      },
+    });
 
     ensureBundle(job)
       .then(() => {

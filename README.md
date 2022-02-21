@@ -30,6 +30,12 @@ X-Global-Name: _LUR_lodash_4_17_21
 Note the `X-Global-Name` header. This indicates the global that the package's exports will be written to when the bundle is loaded as a script in a browser. It won't ever change, but you can check that header
 when setting up your script tag, to know what global to look for.
 
+If you want to minify the code, too, add `?minify=true` to the end of the URL:
+
+```sh
+curl http://localhost:8080/npm/lodash@4.17.21?minify=true
+```
+
 ## License
 
 MIT

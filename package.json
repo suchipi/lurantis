@@ -44,7 +44,8 @@
   },
   "dependencies": {
     "first-base": "^0.1.3",
-    "pretty-print-error": "^1.0.0"
+    "pretty-print-error": "^1.0.0",
+    "terser": "^5.10.0"
   },
   "prettier": {}
 }

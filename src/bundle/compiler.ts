@@ -5,6 +5,7 @@ import os from "os";
 import rimraf from "rimraf";
 import kleur from "kleur";
 import * as kame from "kame";
+import { minify } from "terser";
 import { run } from "../run";
 import { rootDir } from "../root-dir";
 import { makeLogger } from "../make-logger";
@@ -19,6 +20,12 @@ const npmLogsDir = path.join(os.homedir(), ".npm", "_logs");
 const primraf = util.promisify(rimraf);
 
 export async function compile(job: Job): Promise<void> {
+  if (job.description.type !== "npm") {
+    throw new Error("Job types other than npm aren't supported yet");
+  }
+
+  const description = job.description;
+
   log(`Building: ${job.id}`);
 
   const originalCwd = process.cwd();
@@ -33,7 +40,7 @@ export async function compile(job: Job): Promise<void> {
       JSON.stringify({
         name: "@suchipi/null",
         version: "0.0.0",
-        dependencies: { [job.pkg.name]: job.pkg.version },
+        dependencies: { [description.name]: description.version },
       })
     );
 
@@ -48,7 +55,7 @@ export async function compile(job: Job): Promise<void> {
 
     await fs.promises.writeFile(
       dir("index.js"),
-      `module.exports = require(${JSON.stringify(job.pkg.name)});`
+      `module.exports = require(${JSON.stringify(description.name)});`
     );
 
     log(`Starting kame bundle for: ${job.id}`);
@@ -63,6 +70,15 @@ export async function compile(job: Job): Promise<void> {
 
     log(`Cleaning workdir for: ${job.id}`);
     await primraf(dir());
+
+    if (description.options.minify) {
+      log(`Minifying: ${job.id}`);
+      const input = await fs.promises.readFile(job.paths.bundle, "utf-8");
+      const terserResult = await minify(input, { sourceMap: false });
+      await fs.promises.writeFile(job.paths.bundle, terserResult.code!);
+    } else {
+      log(`No minification requested for: ${job.id}`);
+    }
 
     log(`Finished bundling: ${job.id}`);
     return;
