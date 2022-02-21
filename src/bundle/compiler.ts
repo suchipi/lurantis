@@ -1,7 +1,5 @@
 import fs from "fs";
-import path from "path";
 import util from "util";
-import os from "os";
 import rimraf from "rimraf";
 import kleur from "kleur";
 import * as kame from "kame";
@@ -14,8 +12,6 @@ import { Job } from "../job";
 const log = makeLogger(kleur.magenta("COMPILER"));
 
 const bundler = new kame.Bundler();
-
-const npmLogsDir = path.join(os.homedir(), ".npm", "_logs");
 
 const primraf = util.promisify(rimraf);
 
@@ -88,7 +84,5 @@ export async function compile(job: Job): Promise<void> {
     throw err;
   } finally {
     process.chdir(originalCwd);
-    // Don't want our disk to fill up
-    await primraf(npmLogsDir);
   }
 }
