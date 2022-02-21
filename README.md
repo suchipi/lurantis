@@ -27,7 +27,8 @@ X-Global-Name: _LUR_lodash_4_17_21
 // ...the rest of the response is omitted from this README...
 ```
 
-Note the `X-Global-Name` header. This indicates the global that the package's exports will be written to when the bundle is loaded as a script in a browser.
+Note the `X-Global-Name` header. This indicates the global that the package's exports will be written to when the bundle is loaded as a script in a browser. It won't ever change, but you can check that header
+when setting up your script tag, to know what global to look for.
 
 ## License
 

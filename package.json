@@ -11,7 +11,7 @@
     "build:bundle": "rimraf 'dist/*' && kame bundle --resolver ./kame/lurantis-build-resolver.js --input ./src/cli.ts --output ./dist/cli.js",
     "//3": "build:ts is faster, so it's good for local dev",
     "build:ts": "rimraf 'dist/*' && tsc",
-    "//4": "build:bundle is for the npm bundle",
+    "//4": "start is for running the local dev server",
     "start": "npm run build:ts && ./cli.js"
   },
   "keywords": [
@@ -36,14 +36,15 @@
     "change-case": "^4.1.2",
     "cors": "^2.8.5",
     "express": "^4.17.2",
-    "kame": "^0.6.7",
+    "kame": "^0.7.0",
     "kleur": "^4.1.4",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "typescript": "^4.5.5"
   },
   "dependencies": {
-    "first-base": "^0.1.3"
+    "first-base": "^0.1.3",
+    "pretty-print-error": "^1.0.0"
   },
   "prettier": {}
 }

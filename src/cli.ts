@@ -1,4 +1,5 @@
 import kleur from "kleur";
+import { formatError } from "pretty-print-error";
 import { parseArgv } from "./config";
 import { getUsage, getVersion } from "./help-and-version";
 import { makeApp } from "./make-app";
@@ -24,10 +25,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  log(
-    kleur.red(
-      err ? err.stack || err.message || "<unknown error>" : "<unknown error>"
-    )
-  );
+  log(formatError(err));
   process.exit(1);
 });
