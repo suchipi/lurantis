@@ -129,7 +129,7 @@ const content = (domain: string) => `
       </p>
       <h2>Credits</h2>
       <p>
-        Lurantis is made with love by <a href="https://suchipi.com" target="_blank">Lily Scott</a>. And, yes, it's named after the Pokémon.
+        Lurantis is made with love by <a href="https://suchipi.com" target="_blank">Lily Skye</a>. And, yes, it's named after the Pokémon.
       </p>
     </body>
   </html>
