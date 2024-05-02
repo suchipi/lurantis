@@ -27,20 +27,20 @@
     "@types/node": "^20.12.8",
     "@types/rimraf": "^3.0.2",
     "@types/semver": "^7.5.8",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
     "arg": "^5.0.2",
     "change-case": "^4.1.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "first-base": "^1.4.0",
     "kame": "^0.13.0",
     "kleur": "^4.1.5",
-    "prettier": "^3.2.5",
+    "pretty-print-error": "^1.1.2",
     "rimraf": "^5.0.5",
-    "terser": "^5.31.0",
-    "typescript": "^5.4.5"
-  },
-  "dependencies": {
-    "first-base": "^1.4.0",
-    "pretty-print-error": "^1.1.2"
+    "terser": "^5.31.0"
   },
   "prettier": {}
 }
