@@ -1,6 +1,5 @@
 import fs from "fs";
-import util from "util";
-import rimraf from "rimraf";
+import { rimraf } from "rimraf";
 import kleur from "kleur";
 import * as kame from "kame";
 import { minify } from "terser";
@@ -12,8 +11,6 @@ import { Job } from "../job";
 const log = makeLogger(kleur.magenta("COMPILER"));
 
 const bundler = new kame.Bundler();
-
-const primraf = util.promisify(rimraf);
 
 export async function compile(job: Job): Promise<void> {
   if (job.description.type !== "npm") {
@@ -28,7 +25,7 @@ export async function compile(job: Job): Promise<void> {
   const dir = job.paths.workDir;
 
   try {
-    await primraf(dir());
+    await rimraf(dir());
 
     await fs.promises.mkdir(dir(), { recursive: true });
     await fs.promises.writeFile(
@@ -37,7 +34,7 @@ export async function compile(job: Job): Promise<void> {
         name: "@suchipi/null",
         version: "0.0.0",
         dependencies: { [description.name]: description.version },
-      })
+      }),
     );
 
     log(`Starting npm install for: ${job.id}`);
@@ -51,7 +48,7 @@ export async function compile(job: Job): Promise<void> {
 
     await fs.promises.writeFile(
       dir("index.js"),
-      `module.exports = require(${JSON.stringify(description.name)});`
+      `module.exports = require(${JSON.stringify(description.name)});`,
     );
 
     log(`Starting kame bundle for: ${job.id}`);
@@ -65,7 +62,7 @@ export async function compile(job: Job): Promise<void> {
     });
 
     log(`Cleaning workdir for: ${job.id}`);
-    await primraf(dir());
+    await rimraf(dir());
 
     if (description.options.minify) {
       log(`Minifying: ${job.id}`);
@@ -79,7 +76,7 @@ export async function compile(job: Job): Promise<void> {
     log(`Finished bundling: ${job.id}`);
     return;
   } catch (err) {
-    await primraf(dir());
+    await rimraf(dir());
     log(`Error while building ${job.id}: ${err?.stack || err?.message || err}`);
     throw err;
   } finally {

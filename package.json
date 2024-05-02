@@ -5,14 +5,9 @@
   "main": "index.js",
   "bin": "cli.js",
   "scripts": {
-    "//1": "gets you back to the state you would be in after a git clone",
     "clean": "rimraf dist/* && rimraf node_modules && rimraf lurantis-cache/*",
-    "//2": "build:bundle is for the npm bundle",
-    "build:bundle": "rimraf 'dist/*' && kame bundle --resolver ./kame/build-config.js --input ./src/cli.ts --output ./dist/cli.js",
-    "//3": "build:ts is faster, so it's good for local dev",
-    "build:ts": "rimraf 'dist/*' && tsc",
-    "//4": "start is for running the local dev server",
-    "start": "npm run build:ts && ./cli.js"
+    "build": "rimraf 'dist/*' && tsc",
+    "start": "npm run build && ./cli.js"
   },
   "keywords": [
     "bundle",
@@ -33,7 +28,7 @@
     "@types/rimraf": "^3.0.2",
     "@types/semver": "^7.5.8",
     "arg": "^5.0.2",
-    "change-case": "^5.4.4",
+    "change-case": "^4.1.2",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "kame": "^0.13.0",
