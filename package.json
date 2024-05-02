@@ -1,9 +1,11 @@
 {
   "name": "lurantis",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "bundler as a service; on-demand npm package bundler over http",
   "main": "index.js",
-  "bin": "cli.js",
+  "bin": {
+    "lurantis": "cli.js"
+  },
   "scripts": {
     "clean": "rm -rf dist/* && rm -rf node_modules && rm -rf lurantis-cache/*",
     "build": "rm -rf 'dist/*' && tsc",
@@ -21,6 +23,10 @@
     "rest"
   ],
   "author": "Lily Skye <me@suchipi.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suchipi/lurantis.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.17.21",
